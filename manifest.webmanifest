@@ -1,0 +1,23 @@
+{
+  "name": "Hosti — хостелы без комиссии",
+  "short_name": "Hosti",
+  "description": "Поиск и бронирование хостелов Узбекистана по реальной цене: без комиссии, отмена за 24 часа, e-mehmon за минуту.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#EFF2F0",
+  "theme_color": "#14382C",
+  "lang": "ru",
+  "categories": ["travel", "lifestyle"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Мои поездки", "url": "/#/trips" },
+    { "name": "Подобрать хостел", "url": "/#/concierge" },
+    { "name": "Кабинет хостела", "url": "/#/owner" }
+  ]
+}
