@@ -20,7 +20,8 @@
   input,button,textarea,select{font-family:inherit;font-size:16px}
   button{-webkit-appearance:none}
   ::-webkit-scrollbar{width:0;height:0}
-  #root{min-height:100dvh}
+  :root{--app-h:100dvh;--safe-top:0px;--safe-bottom:0px;--fs-pad-right:0px}
+  #root{min-height:var(--app-h)}
   .hs-fade{animation:hsFade .22s ease both}
   @keyframes hsFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   .hs-sheet{animation:hsSheet .26s cubic-bezier(.2,.8,.2,1) both}
@@ -28,6 +29,12 @@
   .hs-skel{background:linear-gradient(90deg,#E7ECE9 25%,#F2F5F3 37%,#E7ECE9 63%);background-size:400% 100%;animation:hsSk 1.2s infinite}
   @keyframes hsSk{from{background-position:100% 50%}to{background-position:0 50%}}
   .hs-scroll{overflow-x:auto;scrollbar-width:none}
+  input:focus,textarea:focus{border-color:#15846E!important;box-shadow:0 0 0 3px rgba(21,132,110,.13);outline:none}
+  input::placeholder,textarea::placeholder{color:#9AA6A0}
+  .hs-tap{transition:background .12s}
+  .hs-tap:active{background:#EDF3F0!important;border-radius:12px}
+  .hs-tab:active{opacity:.6}
+  button:disabled{cursor:default}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
