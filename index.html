@@ -6,7 +6,7 @@
 <title>Hosti — хостелы Узбекистана без комиссии</title>
 <meta name="robots" content="index,follow">
 <meta name="description" content="Реальная цена без комиссии, живая доступность коек, бесплатная отмена за 24 часа, регистрация e-mehmon за минуту.">
-<meta name="theme-color" content="#F5F7F2">
+<meta name="theme-color" content="#ECF0EB">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -24,7 +24,7 @@
      план, Amber #FFB829 — точка бренда и предупреждения, Lilac #8E7BE8 —
      данные, Silver #C4C7C4 — текст, Dim #6E736F — подписи.
 
-     Печатная (светлая): Chalk #F5F7F2 — фон, Bone #EEF1EA — разворот,
+     Печатная (светлая): фон-ступень #ECF0EB, Bone #EEF1EA — разворот,
      Juniper #14382C — заголовки, Saffron #C96F27 — акцентная точка,
      Sage #DFE5DC — плашки, Vellum #C3CDBD — разделители,
      Graphite #57605A — текст, Ash #8B948D — вторичный.
@@ -32,57 +32,63 @@
      Тема переключается атрибутом data-theme на <html>: light / dark.
      Значение «системная» слушает prefers-color-scheme.                        */
 
+  /* Правило поверхностей: между фоном страницы и карточкой всегда виден шаг.
+     Раньше фон был #F5F7F2, а карточка #FFFFFF — разница в 4%, из-за чего
+     всё сливалось в одно молочное поле. Теперь фон уходит на ступень ниже,
+     карточка остаётся белой, и её край читается даже без тени. */
   :root, html[data-theme="light"]{
-    --void:#F5F7F2;                    /* фон приложения — Chalk */
+    --void:#ECF0EB;                    /* фон страницы: ступень под карточкой */
     --surface:#FFFFFF;                 /* карточка */
-    --surface-2:#EEF1EA;               /* Bone: вложенная плашка */
-    --surface-3:#DFE5DC;               /* Sage: выделенная строка */
-    --ink:#14382C;                     /* Juniper: заголовки */
-    --text:#1E2A24;
-    --muted:#57605A;                   /* Graphite */
-    --faint:#7C857E;
-    --line:#C3CDBD;                    /* Vellum */
-    --line-soft:#DFE5DC;
-    --accent:#15846E;                  /* Verdant: действие на светлом */
-    --accent-press:#0F6E5B;
-    --accent-soft:#E4F1EC;
+    --surface-2:#F3F6F2;               /* вложенная плашка */
+    --surface-3:#E1E8DF;               /* выделенная строка, нажатие */
+    --ink:#0E1A15;                     /* заголовки: почти чёрный, не сизый */
+    --text:#18231E;
+    --muted:#5A655E;
+    --faint:#8A938C;                   /* Ash */
+    --line:#DCE2DA;                    /* волосок внутри карточки */
+    --line-strong:#C2CCBF;             /* край карточки, рамка поля */
+    --line-soft:#E7EBE5;
+    --accent:#0F7A62;                  /* Verdant, углублён до 4.5:1 на белом */
+    --accent-press:#0A6250;
+    --accent-soft:#E1F0EA;
     --on-accent:#FFFFFF;
-    --dot:#C96F27;                     /* Saffron: акцентная точка бренда */
-    --warn:#9C5312;
-    --data:#5B47B4;                    /* Lilac, притемнённый под контраст */
-    --ok:#15846E;
-    --overlay:rgba(20,56,44,.42);
-    --skel-a:#E6EBE4; --skel-b:#F3F6F1;
-    --glow:rgba(21,132,110,.18);
-    --shadow:0 1px 2px rgba(20,56,44,.05), 0 8px 24px rgba(20,56,44,.06);
-    --shadow-lift:0 2px 6px rgba(20,56,44,.08), 0 18px 40px rgba(20,56,44,.10);
-    --mesh-1:rgba(31,192,143,.12); --mesh-2:rgba(201,111,39,.10);
+    --dot:#C25E1B;                     /* Saffron: акцентная точка бренда */
+    --warn:#96500F;
+    --data:#4B3E96;                    /* Lilac, притемнённый под контраст */
+    --ok:#0F7A62;
+    --overlay:rgba(14,26,21,.44);
+    --skel-a:#E2E8E0; --skel-b:#F1F4F0;
+    --glow:rgba(15,122,98,.20);
+    --shadow:0 1px 1px rgba(14,26,21,.04), 0 6px 18px rgba(14,26,21,.06);
+    --shadow-lift:0 2px 6px rgba(14,26,21,.07), 0 18px 42px rgba(14,26,21,.12);
+    --mesh-1:rgba(15,122,98,.10); --mesh-2:rgba(194,94,27,.08);
   }
   html[data-theme="dark"]{
     --void:#000000;                    /* Void: фон интерфейса */
-    --surface:#04150E;                 /* Deep: карточки и панели */
-    --surface-2:#0A1D14;
-    --surface-3:#10281C;
+    --surface:#0C1712;                 /* карточка: приподнята над пустотой */
+    --surface-2:#13211A;
+    --surface-3:#1B2C23;
     --ink:#FFFFFF;
-    --text:#E8EDE9;
-    --muted:#C4C7C4;                   /* Silver */
-    --faint:#8A908B;
-    --line:#1E201E;
-    --line-soft:#15211B;
-    --accent:#1FC08F;                  /* Mint: основной акцент */
-    --accent-press:#17A87C;
-    --accent-soft:rgba(31,192,143,.15);
+    --text:#EAF0EC;
+    --muted:#A9B3AD;
+    --faint:#77817B;
+    --line:#22302A;                    /* волосок внутри карточки */
+    --line-strong:#32433B;             /* край карточки */
+    --line-soft:#182219;
+    --accent:#25C795;                  /* Mint: основной акцент */
+    --accent-press:#1BAA7E;
+    --accent-soft:rgba(37,199,149,.16);
     --on-accent:#04150E;
     --dot:#FFB829;                     /* Amber: точка бренда */
     --warn:#FFB829;
-    --data:#8E7BE8;                    /* Lilac */
-    --ok:#1FC08F;
-    --overlay:rgba(0,0,0,.66);
-    --skel-a:#0A1D14; --skel-b:#12261B;
-    --glow:rgba(31,192,143,.26);
-    --shadow:0 1px 2px rgba(0,0,0,.6), 0 10px 30px rgba(0,0,0,.45);
-    --shadow-lift:0 2px 8px rgba(0,0,0,.7), 0 22px 50px rgba(0,0,0,.55);
-    --mesh-1:rgba(31,192,143,.18); --mesh-2:rgba(255,184,41,.08);
+    --data:#9C8BF0;                    /* Lilac */
+    --ok:#25C795;
+    --overlay:rgba(0,0,0,.70);
+    --skel-a:#101C16; --skel-b:#1A281F;
+    --glow:rgba(37,199,149,.28);
+    --shadow:0 1px 2px rgba(0,0,0,.6), 0 10px 30px rgba(0,0,0,.5);
+    --shadow-lift:0 2px 8px rgba(0,0,0,.7), 0 22px 50px rgba(0,0,0,.6);
+    --mesh-1:rgba(37,199,149,.16); --mesh-2:rgba(255,184,41,.07);
   }
 
   :root{--app-h:100dvh;--safe-top:0px;--safe-bottom:0px;--fs-pad-right:0px;
@@ -111,8 +117,12 @@
 
   /* ============================================================ ДВИЖЕНИЕ
      Пружина на появлениях, разгон на уходах, 120 мс на отклик пальцу. */
+  /* Только прозрачность и никакого transform: этим классом main.jsx оборачивает
+     КАЖДЫЙ экран, а пока внутри анимации живёт transform, элемент становится
+     containing block — и любая липкая панель position:fixed внутри экрана
+     уезжает в конец документа. Сдвиг при появлении делает .hs-rise на блоках. */
   .hs-fade{animation:hsFade .26s var(--e-out) both}
-  @keyframes hsFade{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:none}}
+  @keyframes hsFade{from{opacity:0}to{opacity:1}}
   .hs-rise{animation:hsRise .3s var(--e-spring) both}
   @keyframes hsRise{from{opacity:0;transform:translate3d(0,14px,0)}to{opacity:1;transform:none}}
   .hs-pop{animation:hsPop .34s var(--e-spring) both}
@@ -159,7 +169,7 @@
         && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
       document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
       var m = document.querySelector('meta[name=theme-color]');
-      if (m) m.setAttribute('content', dark ? '#000000' : '#F5F7F2');
+      if (m) m.setAttribute('content', dark ? '#000000' : '#ECF0EB');
     } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
   })();
 </script>
