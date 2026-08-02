@@ -6,7 +6,7 @@
 <title>Hosti — хостелы Узбекистана без комиссии</title>
 <meta name="robots" content="index,follow">
 <meta name="description" content="Реальная цена без комиссии, живая доступность коек, бесплатная отмена за 24 часа, регистрация e-mehmon за минуту.">
-<meta name="theme-color" content="#12171A">
+<meta name="theme-color" content="#F5F7F2">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -16,81 +16,161 @@
 <style>
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
-  /* Токены языка «дорожного документа». Светлая тема — бумага и чернила;
-     тёмная — фотонегатив документа, а не чёрная бумага. */
-  :root{
-    --paper:#EBE4D6; --card:#FFFDF8; --under:#DACDB4;
-    --ink:#12171A; --muted:#6B655A; --muted-deep:#575147;
-    --terra:#A93C17; --terra-deep:#943412;
-    --green:#1C6B4C; --green-deep:#175C41;
-    --line:#C9BCA2; --line-strong:#7E7360;
-    --disabled-fill:#DDD5C4; --disabled-ink:#514B42;
-    --on-accent:#FFFFFF; --overlay:rgba(18,23,26,.52);
-    --skel-a:#E3DBCB; --skel-b:#F3EDE1;
-    --app-h:100dvh; --safe-top:0px; --safe-bottom:0px; --fs-pad-right:0px;
+  /* ============================================================ ПАЛИТРА БРЕНДА
+     Бренд-бук Hosti v2.0 задаёт две среды, и обе здесь дословно.
+
+     Цифровая (тёмная): Void #000000 — фон, Deep #04150E — карточки и панели,
+     Mint #1FC08F — основной акцент и действие, Verdant #15846E — линии и второй
+     план, Amber #FFB829 — точка бренда и предупреждения, Lilac #8E7BE8 —
+     данные, Silver #C4C7C4 — текст, Dim #6E736F — подписи.
+
+     Печатная (светлая): Chalk #F5F7F2 — фон, Bone #EEF1EA — разворот,
+     Juniper #14382C — заголовки, Saffron #C96F27 — акцентная точка,
+     Sage #DFE5DC — плашки, Vellum #C3CDBD — разделители,
+     Graphite #57605A — текст, Ash #8B948D — вторичный.
+
+     Тема переключается атрибутом data-theme на <html>: light / dark.
+     Значение «системная» слушает prefers-color-scheme.                        */
+
+  :root, html[data-theme="light"]{
+    --void:#F5F7F2;                    /* фон приложения — Chalk */
+    --surface:#FFFFFF;                 /* карточка */
+    --surface-2:#EEF1EA;               /* Bone: вложенная плашка */
+    --surface-3:#DFE5DC;               /* Sage: выделенная строка */
+    --ink:#14382C;                     /* Juniper: заголовки */
+    --text:#1E2A24;
+    --muted:#57605A;                   /* Graphite */
+    --faint:#7C857E;
+    --line:#C3CDBD;                    /* Vellum */
+    --line-soft:#DFE5DC;
+    --accent:#15846E;                  /* Verdant: действие на светлом */
+    --accent-press:#0F6E5B;
+    --accent-soft:#E4F1EC;
+    --on-accent:#FFFFFF;
+    --dot:#C96F27;                     /* Saffron: акцентная точка бренда */
+    --warn:#9C5312;
+    --data:#5B47B4;                    /* Lilac, притемнённый под контраст */
+    --ok:#15846E;
+    --overlay:rgba(20,56,44,.42);
+    --skel-a:#E6EBE4; --skel-b:#F3F6F1;
+    --glow:rgba(21,132,110,.18);
+    --shadow:0 1px 2px rgba(20,56,44,.05), 0 8px 24px rgba(20,56,44,.06);
+    --shadow-lift:0 2px 6px rgba(20,56,44,.08), 0 18px 40px rgba(20,56,44,.10);
+    --mesh-1:rgba(31,192,143,.12); --mesh-2:rgba(201,111,39,.10);
   }
   html[data-theme="dark"]{
-    --paper:#14181B; --card:#1B2024; --under:#252B30;
-    --ink:#EDE6D8; --muted:#A8A398; --muted-deep:#A8A398;
-    --terra:#E2825C; --terra-deep:#E2825C;
-    --green:#4FB88C; --green-deep:#4FB88C;
-    --line:#333A3F; --line-strong:#6A737A;
-    --disabled-fill:#2A3035; --disabled-ink:#8C8C86;
-    --on-accent:#12171A; --overlay:rgba(0,0,0,.62);
-    --skel-a:#20262B; --skel-b:#2A3137;
+    --void:#000000;                    /* Void: фон интерфейса */
+    --surface:#04150E;                 /* Deep: карточки и панели */
+    --surface-2:#0A1D14;
+    --surface-3:#10281C;
+    --ink:#FFFFFF;
+    --text:#E8EDE9;
+    --muted:#C4C7C4;                   /* Silver */
+    --faint:#8A908B;
+    --line:#1E201E;
+    --line-soft:#15211B;
+    --accent:#1FC08F;                  /* Mint: основной акцент */
+    --accent-press:#17A87C;
+    --accent-soft:rgba(31,192,143,.15);
+    --on-accent:#04150E;
+    --dot:#FFB829;                     /* Amber: точка бренда */
+    --warn:#FFB829;
+    --data:#8E7BE8;                    /* Lilac */
+    --ok:#1FC08F;
+    --overlay:rgba(0,0,0,.66);
+    --skel-a:#0A1D14; --skel-b:#12261B;
+    --glow:rgba(31,192,143,.26);
+    --shadow:0 1px 2px rgba(0,0,0,.6), 0 10px 30px rgba(0,0,0,.45);
+    --shadow-lift:0 2px 8px rgba(0,0,0,.7), 0 22px 50px rgba(0,0,0,.55);
+    --mesh-1:rgba(31,192,143,.18); --mesh-2:rgba(255,184,41,.08);
   }
 
-  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+  :root{--app-h:100dvh;--safe-top:0px;--safe-bottom:0px;--fs-pad-right:0px;
+        --e-spring:cubic-bezier(.34,1.4,.5,1);--e-out:cubic-bezier(.2,.7,.3,1);--e-in:cubic-bezier(.4,0,1,1)}
+
+  html,body{margin:0;padding:0;background:var(--void);color:var(--text);
+    font-family:'HostiText','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
   body{overscroll-behavior-y:none}
+  /* Смена темы плавная, но только по цвету — геометрия не «дышит» */
+  html.hs-theming, html.hs-theming *{transition:background-color .3s ease, color .3s ease, border-color .3s ease, fill .3s ease}
   input,button,textarea,select{font-family:inherit;font-size:16px}
   button{-webkit-appearance:none}
   ::-webkit-scrollbar{width:0;height:0}
-  #root{min-height:var(--app-h)}
+  #root{min-height:var(--app-h);position:relative}
 
-  /* Переходы: направление читается, бумага не пружинит.
-     Четыре длительности — 120 отклик, 180 экран, 240 шторка, 320 перекрытие. */
-  .hs-fade{animation:hsFade .18s cubic-bezier(.2,.7,.3,1) both}
-  @keyframes hsFade{from{opacity:0}to{opacity:1}}
-  .hs-fade-out{animation:hsFadeOut .2s cubic-bezier(.4,0,1,1) both}
-  @keyframes hsFadeOut{from{opacity:1}to{opacity:0}}
-  .hs-rise{animation:hsRise .18s cubic-bezier(.2,.7,.3,1) both}
-  @keyframes hsRise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  .hs-sheet{animation:hsSheet .24s cubic-bezier(.2,.7,.3,1) both}
-  @keyframes hsSheet{from{transform:translateY(100%)}to{transform:none}}
-  .hs-sheet-out{animation:hsSheetOut .2s cubic-bezier(.4,0,1,1) both}
-  @keyframes hsSheetOut{from{transform:none}to{transform:translateY(100%)}}
-  .hs-stamp{animation:hsStamp .14s cubic-bezier(.4,0,1,1) both}
-  @keyframes hsStamp{from{transform:scale(1.06);opacity:0}to{transform:scale(1);opacity:1}}
+  /* Фирменное свечение фона: пятна мяты и янтаря, как на разворотах бренд-бука.
+     Медленное дыхание вместо постоянной анимации — чтобы не жечь батарею. */
+  #root::before{
+    content:'';position:fixed;inset:-25% -20% auto -20%;height:78vh;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(46% 40% at 16% 6%, var(--mesh-1), transparent 70%),
+      radial-gradient(40% 34% at 90% 0%, var(--mesh-2), transparent 72%);
+    animation:hsBreathe 20s ease-in-out infinite alternate;
+  }
+  @keyframes hsBreathe{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(0,2%,0) scale(1.09)}}
 
-  /* Кнопка в работе: текст остаётся на месте, вдоль нижней кромки идёт полоса. */
-  .hs-btnbar{animation:hsBtnBar 1s cubic-bezier(.4,0,.6,1) infinite}
-  @keyframes hsBtnBar{from{transform:translateX(-110%)}to{transform:translateX(340%)}}
+  /* ============================================================ ДВИЖЕНИЕ
+     Пружина на появлениях, разгон на уходах, 120 мс на отклик пальцу. */
+  .hs-fade{animation:hsFade .26s var(--e-out) both}
+  @keyframes hsFade{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:none}}
+  .hs-rise{animation:hsRise .3s var(--e-spring) both}
+  @keyframes hsRise{from{opacity:0;transform:translate3d(0,14px,0)}to{opacity:1;transform:none}}
+  .hs-pop{animation:hsPop .34s var(--e-spring) both}
+  @keyframes hsPop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+  .hs-sheet{animation:hsSheet .34s var(--e-spring) both}
+  @keyframes hsSheet{from{transform:translate3d(0,100%,0)}to{transform:none}}
+  .hs-sheet-out{animation:hsSheetOut .2s var(--e-in) both}
+  @keyframes hsSheetOut{from{transform:none}to{transform:translate3d(0,100%,0)}}
+  .hs-stamp{animation:hsStamp .44s var(--e-spring) both}
+  @keyframes hsStamp{0%{opacity:0;transform:scale(.6) rotate(-8deg)}60%{opacity:1}100%{opacity:1;transform:scale(1) rotate(0)}}
 
-  .hs-skel{background:linear-gradient(90deg,var(--skel-a) 25%,var(--skel-b) 37%,var(--skel-a) 63%);background-size:400% 100%;animation:hsSk 1.2s infinite}
+  /* Лента появляется каскадом: карточки выезжают одна за другой */
+  .hs-stagger>*{animation:hsRise .34s var(--e-spring) both}
+  .hs-stagger>*:nth-child(1){animation-delay:.02s} .hs-stagger>*:nth-child(2){animation-delay:.06s}
+  .hs-stagger>*:nth-child(3){animation-delay:.10s} .hs-stagger>*:nth-child(4){animation-delay:.14s}
+  .hs-stagger>*:nth-child(5){animation-delay:.18s} .hs-stagger>*:nth-child(6){animation-delay:.22s}
+  .hs-stagger>*:nth-child(7){animation-delay:.26s} .hs-stagger>*:nth-child(n+8){animation-delay:.3s}
+
+  .hs-skel{background:linear-gradient(90deg,var(--skel-a) 25%,var(--skel-b) 37%,var(--skel-a) 63%);background-size:400% 100%;animation:hsSk 1.3s infinite}
   @keyframes hsSk{from{background-position:100% 50%}to{background-position:0 50%}}
   .hs-scroll{overflow-x:auto;scrollbar-width:none}
 
-  /* Фокус рисуется снаружи элемента: на терракотовой заливке чернильное
-     кольцо не проходит по контрасту, на бумаге — проходит с запасом. */
-  input:focus,textarea:focus,select:focus{border-color:var(--ink)!important;outline:2px solid var(--ink);outline-offset:2px}
-  button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:12px}
-  input::placeholder,textarea::placeholder{color:var(--muted)}
+  /* Пульс мятного свечения у главного действия — живая кнопка, но не мигалка */
+  .hs-glow{animation:hsGlow 2.8s var(--e-out) infinite}
+  @keyframes hsGlow{0%{box-shadow:0 0 0 0 var(--glow)}70%{box-shadow:0 0 0 16px transparent}100%{box-shadow:0 0 0 0 transparent}}
 
-  /* Отклик на палец — чернила, а не резина: мгновенное потемнение и возврат. */
-  .hs-tap{transition:background .12s linear}
-  .hs-tap:active{background:var(--under)!important;border-radius:12px}
-  .hs-tab:active{background:var(--under)}
+  input:focus,textarea:focus,select:focus{border-color:var(--accent)!important;outline:2px solid var(--accent);outline-offset:1px}
+  button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:16px}
+  input::placeholder,textarea::placeholder{color:var(--faint)}
+
+  .hs-tap{transition:background-color .12s linear, transform .12s var(--e-out)}
+  .hs-tap:active{background:var(--surface-3)!important;transform:scale(.995)}
+  .hs-tab:active{background:var(--surface-2)}
   button:disabled{cursor:default}
-  @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
+<script>
+  /* Тема выбирается до первой отрисовки: иначе на старте мигает светлым. */
+  (function () {
+    try {
+      var p = JSON.parse(localStorage.getItem('hosti_prefs_v4') || '{}');
+      var mode = p.theme || 'system';
+      var dark = mode === 'dark' || (mode === 'system'
+        && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var m = document.querySelector('meta[name=theme-color]');
+      if (m) m.setAttribute('content', dark ? '#000000' : '#F5F7F2');
+    } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+  })();
+</script>
 </head>
 <body>
 <div id="root"><div id="boot" style="max-width:480px;margin:0 auto;padding:22px 16px">
-  <div style="height:56px;border-radius:16px;background:#12171A"></div>
-  <div style="height:150px;border-radius:20px;background:#DACDB4;margin-top:14px"></div>
-  <div style="height:64px;border-radius:16px;background:#DACDB4;margin-top:10px"></div>
-  <div style="height:64px;border-radius:16px;background:#DACDB4;margin-top:8px"></div>
-  <div style="text-align:center;color:#6B655A;font:400 13px/1.5 system-ui,sans-serif;margin-top:18px">Hosti загружается…</div>
+  <div style="height:56px;border-radius:16px;background:var(--surface)"></div>
+  <div style="height:150px;border-radius:20px;background:var(--surface-2);margin-top:14px"></div>
+  <div style="height:64px;border-radius:16px;background:var(--surface-2);margin-top:10px"></div>
+  <div style="height:64px;border-radius:16px;background:var(--surface-2);margin-top:8px"></div>
+  <div style="text-align:center;color:var(--muted);font:400 13px/1.5 system-ui,sans-serif;margin-top:18px">Hosti загружается…</div>
 </div></div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="./app.js"></script>
