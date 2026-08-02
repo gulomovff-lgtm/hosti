@@ -6,7 +6,7 @@
 <title>Hosti — хостелы Узбекистана без комиссии</title>
 <meta name="robots" content="index,follow">
 <meta name="description" content="Реальная цена без комиссии, живая доступность коек, бесплатная отмена за 24 часа, регистрация e-mehmon за минуту.">
-<meta name="theme-color" content="#14382C">
+<meta name="theme-color" content="#12171A">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -15,42 +15,82 @@
 <link rel="stylesheet" href="./fonts/fonts.css">
 <style>
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{margin:0;padding:0;background:#EFF2F0;color:#1C2823;font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+
+  /* Токены языка «дорожного документа». Светлая тема — бумага и чернила;
+     тёмная — фотонегатив документа, а не чёрная бумага. */
+  :root{
+    --paper:#EBE4D6; --card:#FFFDF8; --under:#DACDB4;
+    --ink:#12171A; --muted:#6B655A; --muted-deep:#575147;
+    --terra:#A93C17; --terra-deep:#943412;
+    --green:#1C6B4C; --green-deep:#175C41;
+    --line:#C9BCA2; --line-strong:#7E7360;
+    --disabled-fill:#DDD5C4; --disabled-ink:#514B42;
+    --on-accent:#FFFFFF; --overlay:rgba(18,23,26,.52);
+    --skel-a:#E3DBCB; --skel-b:#F3EDE1;
+    --app-h:100dvh; --safe-top:0px; --safe-bottom:0px; --fs-pad-right:0px;
+  }
+  html[data-theme="dark"]{
+    --paper:#14181B; --card:#1B2024; --under:#252B30;
+    --ink:#EDE6D8; --muted:#A8A398; --muted-deep:#A8A398;
+    --terra:#E2825C; --terra-deep:#E2825C;
+    --green:#4FB88C; --green-deep:#4FB88C;
+    --line:#333A3F; --line-strong:#6A737A;
+    --disabled-fill:#2A3035; --disabled-ink:#8C8C86;
+    --on-accent:#12171A; --overlay:rgba(0,0,0,.62);
+    --skel-a:#20262B; --skel-b:#2A3137;
+  }
+
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
   body{overscroll-behavior-y:none}
   input,button,textarea,select{font-family:inherit;font-size:16px}
   button{-webkit-appearance:none}
   ::-webkit-scrollbar{width:0;height:0}
-  :root{--app-h:100dvh;--safe-top:0px;--safe-bottom:0px;--fs-pad-right:0px}
   #root{min-height:var(--app-h)}
-  /* Только прозрачность: любой transform на контейнере экрана создаёт containing block
-     и ломает position:fixed внутри — из-за этого панель с ценой и кнопкой брони
-     переставала прилипать к низу карточки хостела. */
-  .hs-fade{animation:hsFade .22s ease both}
+
+  /* Переходы: направление читается, бумага не пружинит.
+     Четыре длительности — 120 отклик, 180 экран, 240 шторка, 320 перекрытие. */
+  .hs-fade{animation:hsFade .18s cubic-bezier(.2,.7,.3,1) both}
   @keyframes hsFade{from{opacity:0}to{opacity:1}}
-  .hs-rise{animation:hsRise .22s ease both}
+  .hs-fade-out{animation:hsFadeOut .2s cubic-bezier(.4,0,1,1) both}
+  @keyframes hsFadeOut{from{opacity:1}to{opacity:0}}
+  .hs-rise{animation:hsRise .18s cubic-bezier(.2,.7,.3,1) both}
   @keyframes hsRise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  .hs-sheet{animation:hsSheet .26s cubic-bezier(.2,.8,.2,1) both}
+  .hs-sheet{animation:hsSheet .24s cubic-bezier(.2,.7,.3,1) both}
   @keyframes hsSheet{from{transform:translateY(100%)}to{transform:none}}
-  .hs-skel{background:linear-gradient(90deg,#E7ECE9 25%,#F2F5F3 37%,#E7ECE9 63%);background-size:400% 100%;animation:hsSk 1.2s infinite}
+  .hs-sheet-out{animation:hsSheetOut .2s cubic-bezier(.4,0,1,1) both}
+  @keyframes hsSheetOut{from{transform:none}to{transform:translateY(100%)}}
+  .hs-stamp{animation:hsStamp .14s cubic-bezier(.4,0,1,1) both}
+  @keyframes hsStamp{from{transform:scale(1.06);opacity:0}to{transform:scale(1);opacity:1}}
+
+  /* Кнопка в работе: текст остаётся на месте, вдоль нижней кромки идёт полоса. */
+  .hs-btnbar{animation:hsBtnBar 1s cubic-bezier(.4,0,.6,1) infinite}
+  @keyframes hsBtnBar{from{transform:translateX(-110%)}to{transform:translateX(340%)}}
+
+  .hs-skel{background:linear-gradient(90deg,var(--skel-a) 25%,var(--skel-b) 37%,var(--skel-a) 63%);background-size:400% 100%;animation:hsSk 1.2s infinite}
   @keyframes hsSk{from{background-position:100% 50%}to{background-position:0 50%}}
   .hs-scroll{overflow-x:auto;scrollbar-width:none}
-  input:focus,textarea:focus{border-color:#0F6E5B!important;outline:2px solid #0F6E5B;outline-offset:1px}
-  button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid #0F6E5B;outline-offset:2px;border-radius:8px}
-  input::placeholder,textarea::placeholder{color:#6E7A74}
-  .hs-tap{transition:background .12s}
-  .hs-tap:active{background:#EDF3F0!important;border-radius:12px}
-  .hs-tab:active{opacity:.6}
+
+  /* Фокус рисуется снаружи элемента: на терракотовой заливке чернильное
+     кольцо не проходит по контрасту, на бумаге — проходит с запасом. */
+  input:focus,textarea:focus,select:focus{border-color:var(--ink)!important;outline:2px solid var(--ink);outline-offset:2px}
+  button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:12px}
+  input::placeholder,textarea::placeholder{color:var(--muted)}
+
+  /* Отклик на палец — чернила, а не резина: мгновенное потемнение и возврат. */
+  .hs-tap{transition:background .12s linear}
+  .hs-tap:active{background:var(--under)!important;border-radius:12px}
+  .hs-tab:active{background:var(--under)}
   button:disabled{cursor:default}
   @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
 <div id="root"><div id="boot" style="max-width:480px;margin:0 auto;padding:22px 16px">
-  <div style="height:56px;border-radius:16px;background:#14382C"></div>
-  <div style="height:150px;border-radius:20px;background:#E7ECE9;margin-top:14px"></div>
-  <div style="height:64px;border-radius:16px;background:#E7ECE9;margin-top:10px"></div>
-  <div style="height:64px;border-radius:16px;background:#E7ECE9;margin-top:8px"></div>
-  <div style="text-align:center;color:#5C6862;font:400 13px/1.5 system-ui,sans-serif;margin-top:18px">Hosti загружается…</div>
+  <div style="height:56px;border-radius:16px;background:#12171A"></div>
+  <div style="height:150px;border-radius:20px;background:#DACDB4;margin-top:14px"></div>
+  <div style="height:64px;border-radius:16px;background:#DACDB4;margin-top:10px"></div>
+  <div style="height:64px;border-radius:16px;background:#DACDB4;margin-top:8px"></div>
+  <div style="text-align:center;color:#6B655A;font:400 13px/1.5 system-ui,sans-serif;margin-top:18px">Hosti загружается…</div>
 </div></div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="./app.js"></script>
