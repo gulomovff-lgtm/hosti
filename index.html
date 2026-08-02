@@ -22,8 +22,13 @@
   ::-webkit-scrollbar{width:0;height:0}
   :root{--app-h:100dvh;--safe-top:0px;--safe-bottom:0px;--fs-pad-right:0px}
   #root{min-height:var(--app-h)}
+  /* Только прозрачность: любой transform на контейнере экрана создаёт containing block
+     и ломает position:fixed внутри — из-за этого панель с ценой и кнопкой брони
+     переставала прилипать к низу карточки хостела. */
   .hs-fade{animation:hsFade .22s ease both}
-  @keyframes hsFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @keyframes hsFade{from{opacity:0}to{opacity:1}}
+  .hs-rise{animation:hsRise .22s ease both}
+  @keyframes hsRise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   .hs-sheet{animation:hsSheet .26s cubic-bezier(.2,.8,.2,1) both}
   @keyframes hsSheet{from{transform:translateY(100%)}to{transform:none}}
   .hs-skel{background:linear-gradient(90deg,#E7ECE9 25%,#F2F5F3 37%,#E7ECE9 63%);background-size:400% 100%;animation:hsSk 1.2s infinite}
