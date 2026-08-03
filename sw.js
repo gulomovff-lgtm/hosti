@@ -1,5 +1,5 @@
-/* Hosti standalone — офлайн-оболочка (сборка 42bec525e4) */
-const CACHE = 'hosti-standalone-42bec525e4';
+/* Hosti standalone — офлайн-оболочка (сборка 3753f9a776) */
+const CACHE = 'hosti-standalone-3753f9a776';
 const ASSETS = ['./', './index.html', './app.js', './manifest.webmanifest', './fonts/fonts.css', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
