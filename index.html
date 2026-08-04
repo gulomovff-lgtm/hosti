@@ -96,7 +96,9 @@
 
   html,body{margin:0;padding:0;background:var(--void);color:var(--text);
     font-family:'HostiText','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
-  body{overscroll-behavior-y:none}
+  /* x: жест «назад по истории» перехватывал горизонтальные свайпы у левого
+     края — вкладки, онбординг и фото листались, а браузер уходил со страницы */
+  body{overscroll-behavior-y:none;overscroll-behavior-x:none}
   /* Смена темы плавная, но только по цвету — геометрия не «дышит» */
   html.hs-theming, html.hs-theming *{transition:background-color .3s ease, color .3s ease, border-color .3s ease, fill .3s ease}
   input,button,textarea,select{font-family:inherit;font-size:16px}
